@@ -1,0 +1,16 @@
+function cx= rsencode(mx,gx,Y) %msg in ascending powers of x
+%does the systematic encoding of the message mx in a field Y of generator
+%polynomial gx
+%@Shravya Kunamalla
+[m,n]=size(Y);
+k=length(mx);
+ax=[-Inf*ones(1,m-k-1) mx];
+[qx,rx]=polydiv(ax,gx,Y);
+rx=rx(1:max(find(rx~=-Inf)));
+rx1(1,1:17)=[0];
+len=length(rx);
+if len<17
+    rx(1,len+1:17)=[0];
+end
+cx=[rx mx];
+end

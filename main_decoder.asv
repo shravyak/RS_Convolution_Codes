@@ -1,0 +1,10 @@
+Y=gfpower([1 0],[1 0 0 0 1 1 1 0 1],2);
+primpoly=[1 0 0 0 1 1 1 0 1];
+t=8;
+
+genpoly=GP(t,Y);  %calculate the generator polynomial
+rx= % give the output of convolution decoder here
+s=syndrome(rx,t,Y);
+lamda=bkm(s,primpoly,size(Y,2)); %error locator polynomial
+error=errloc(lamda,t,Y);
+error_locator=size(Y,1)-1-error; % matrix containing the positions of errors
